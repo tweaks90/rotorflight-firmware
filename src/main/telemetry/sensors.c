@@ -64,6 +64,11 @@
 #include "pg/fbus_master.h"
 #endif
 
+#ifdef USE_SPORT_MASTER
+#include "sport_master.h"
+#endif
+
+
 /** Sensor functions **/
 
 static int getVoltage(voltageMeterId_e id)
@@ -566,21 +571,29 @@ bool telemetrySensorActive(sensor_id_e id)
 
 #ifdef USE_FBUS_MASTER
         case TELEM_FBUS_SENSOR_1:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[0] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[0] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_2:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[1] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[1] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_3:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[2] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[2] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_4:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[3] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[3] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_5:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[4] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[4] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_6:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[5] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[5] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_7:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[6] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[6] <= FBUS_MAX_PHYS_ID);
         case TELEM_FBUS_SENSOR_8:
-            return fbusMasterIsEnabled() && (fbusMasterConfig()->forwardedSensors[7] <= FBUS_MAX_PHYS_ID);
+            return (fbusMasterIsEnabled() || sportMasterIsEnabled())
+                        && (fbusMasterConfig()->forwardedSensors[7] <= FBUS_MAX_PHYS_ID);
 #endif
 
         default:
